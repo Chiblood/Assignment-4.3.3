@@ -1,5 +1,5 @@
 ﻿/* Assignment 4.3.3
-3. Write a program in C# Sharp to print all unique elements in an array.
+3. Write a program in C# Sharp to print all unique elements in an array using a dictionary.
 Test Data :
 Input the number of elements to be stored in the array :3
 Input 3 elements in the array :
@@ -14,40 +14,30 @@ public class Program
 {
     public static void Main(string[] args)
     {
-        Console.Write("Input the number of elements to be stored in the array :");
-        int n = Convert.ToInt32(Console.ReadLine());
-        int[] arr1 = new int[n];
-        int[] arr2 = new int[n];
-        int i, j, k = 0, count;
+        int [] arr1 = {1 , 5 , 1};
+        Dictionary<int, int> numCountDict = new Dictionary<int, int>();
 
-        Console.WriteLine("Input {0} elements in the array :", n);
-        for (i = 0; i < n; i++)
+        // Count the occurrences of each number in the array
+        foreach (int num in arr1)
         {
-            Console.Write("element - {0} : ", i);
-            arr1[i] = Convert.ToInt32(Console.ReadLine());
-        }
-
-        for (i = 0; i < n; i++)
-        {
-            count = 0;
-            for (j = 0; j < n; j++)
+            if (numCountDict.ContainsKey(num))
             {
-                if (arr1[i] == arr1[j])
-                {
-                    count++;
-                }
+                numCountDict[num]++;
             }
-            if (count < 2)
+            else
             {
-                arr2[k] = arr1[i];
-                k++;
+                numCountDict[num] = 1;
             }
         }
 
         Console.WriteLine("The unique elements found in the array are :");
-        for (i = 0; i < k; i++)
+        // Print numbers that occurred only once
+        foreach (var item in numCountDict)
         {
-            Console.WriteLine(arr2[i]);
+            if (item.Value == 1)
+            {
+                Console.WriteLine(item.Key);
+            }
         }
     }
 }
